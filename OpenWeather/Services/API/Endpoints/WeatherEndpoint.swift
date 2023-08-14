@@ -8,7 +8,8 @@
 import Foundation
 
 enum WeatherEndpoint {
-    case getCurrentWeather
+    case getCurrentWeather(latitude: Double, longitude: Double)
+    case getGeoItems(query: String)
 }
 
 extension WeatherEndpoint: Endpoint {
@@ -20,6 +21,8 @@ extension WeatherEndpoint: Endpoint {
         switch self {
         case .getCurrentWeather:
             return "/data/2.5/weather"
+        case .getGeoItems:
+            return "/geo/1.0/direct"
         }
     }
 
@@ -29,8 +32,7 @@ extension WeatherEndpoint: Endpoint {
 
     var header: [String : String]? {
         [
-            "Content-Type": "application/json;charset=utf-8",
-            "Authorization": "Bearer \(Constants.apiKey)"
+            "Content-Type": "application/json;charset=utf-8"
         ]
     }
 
@@ -40,10 +42,19 @@ extension WeatherEndpoint: Endpoint {
 
     var query: [String : String?]? {
         switch self {
-        case .getCurrentWeather:
+        case .getCurrentWeather(let latitude, let longitude):
             return [
-                "lat": "latitude",
-                "lon": "longitude"
+                "lat": String(latitude),
+                "lon": String(longitude),
+                "units": "metric",
+                "lang": "en",
+                "appid": apiKey
+            ]
+        case .getGeoItems(let query):
+            return [
+                "q": query,
+                "limit": "20",
+                "appid": apiKey
             ]
         }
     }

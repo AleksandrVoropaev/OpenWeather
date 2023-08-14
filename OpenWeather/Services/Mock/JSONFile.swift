@@ -8,4 +8,5 @@ import Foundation
 
 enum JSONFile: String {
     case weatherResponse
+    case geoItemResponse
 }

@@ -14,11 +14,10 @@ struct WeatherResponse: Decodable {
     let main: Main
     let visibility: Int
     let wind: Wind
-    let rain: Precipitation
-    let snow: Precipitation
+    let rain: Precipitation?
+    let snow: Precipitation?
     let clouds: Clouds
     let dt: Int
-    let sys: Sys
     let timezone: Int
     let id: Int
     let name: String
@@ -41,8 +40,8 @@ struct Main: Decodable {
     let tempMax: Double
     let pressure: Int
     let humidity: Int
-    let seaLevel: Int
-    let grndLevel: Int
+    let seaLevel: Int?
+    let grndLevel: Int?
 }
 
 struct Precipitation: Decodable {
@@ -55,14 +54,6 @@ struct Precipitation: Decodable {
     }
 }
 
-struct Sys: Decodable {
-    let id: Int
-    let type: Int
-    let country: String
-    let sunrise: Int
-    let sunset: Int
-}
-
 struct Weather: Decodable {
     let id: Int
     let main: String
@@ -73,5 +64,5 @@ struct Weather: Decodable {
 struct Wind: Decodable {
     let speed: Double
     let deg: Int
-    let gust: Double
+    let gust: Double?
 }
