@@ -9,11 +9,6 @@ import Foundation
 import Combine
 
 extension ForecastView {
-    enum PresentationError: Error {
-        case location(LocationError)
-        case network
-    }
-
     @MainActor final class ViewModel: ObservableObject {
         // MARK: - PROPERTIES
 
@@ -41,16 +36,7 @@ extension ForecastView {
         // MARK: - PUBLIC FUNCTIONS
 
         func refreshForecast() {
-            userLocation = nil
-            weather = nil
-
-            if case.success(.some(let location)) = locationService.location {
-                Task {
-                    weather = nil
-                    error = nil
-                    await fetchForecast(latitude: location.latitude, longitude: location.longitude)
-                }
-            }
+            locationService.updateLocation()
         }
 
         // MARK: - PRIVATE FUNCTIONS
@@ -62,8 +48,7 @@ extension ForecastView {
             case .success(let weather):
                 self.weather = weather
                 self.error = nil
-            case .failure(let error):
-                print(error)
+            case .failure:
                 self.weather = nil
                 self.error = .network
             }
@@ -75,6 +60,10 @@ extension ForecastView {
                 .sink { [weak self] result in
                     guard let self else { return }
 
+                    self.userLocation = nil
+                    self.error = nil
+                    self.weather = nil
+
                     switch result {
                     case .success(.none):
                         break
@@ -83,7 +72,6 @@ extension ForecastView {
                             await self.fetchForecast(latitude: location.latitude, longitude: location.longitude)
                         }
                     case .failure(let error):
-                        self.weather = nil
                         self.error = .location(error)
                     }
                 }
@@ -102,6 +90,20 @@ extension ForecastView {
                     }
                 }
                 .store(in: &cancellables)
+        }
+    }
+}
+
+extension ForecastView {
+    enum PresentationError: Error, LocalizedError {
+        case location(LocationError)
+        case network
+
+        var errorDescription: String? {
+            switch self {
+            case .location: return "Location error"
+            case .network: return "Network error"
+            }
         }
     }
 }

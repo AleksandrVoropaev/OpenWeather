@@ -11,6 +11,7 @@ struct SearchView: View {
     // MARK: - PROPERTIES
 
     @ObservedObject var viewModel: ViewModel = ViewModel()
+    @State private var isAlertPresented = false
 
     let layout = [GridItem(.flexible())]
 
@@ -27,6 +28,12 @@ struct SearchView: View {
             }
         }
         .padding(.horizontal)
+        .alert(isPresented: $isAlertPresented, error: viewModel.error) {}
+        .onReceive(viewModel.$error) {
+            guard $0 != nil else { return }
+
+            isAlertPresented = true
+        }
     }
 
     // MARK: - SEARCHBAR

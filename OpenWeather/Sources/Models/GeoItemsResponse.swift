@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GeoItem: Decodable, Hashable{
+struct GeoItem: Decodable, Hashable {
     let name: String
     let latitude: Double
     let longitude: Double
@@ -35,6 +35,16 @@ extension GeoItem: Mockable {
 
 extension JSONFileStub {
     static func makeResourceGeoItem200() -> Self {
-        .getResource(.geoItemResponse, 200)
+        .getResource(.geoItem, 200)
+    }
+}
+
+extension GeoItem: ArrayMockable {
+    static var stubWithArray: JSONFileStub { .makeResourceGeosResponse200() }
+}
+
+extension JSONFileStub {
+    static func makeResourceGeosResponse200() -> Self {
+        .getResource(.geoItemsResponse, 200)
     }
 }

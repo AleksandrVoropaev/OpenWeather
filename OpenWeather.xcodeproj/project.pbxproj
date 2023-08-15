@@ -33,8 +33,10 @@
 		11BD2F882A8AA759003F9320 /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F872A8AA759003F9320 /* MainTabViewModel.swift */; };
 		11BD2F8B2A8AA9F7003F9320 /* SearchItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F8A2A8AA9F7003F9320 /* SearchItemView.swift */; };
 		11BD2F8D2A8AAA97003F9320 /* GeoItemsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F8C2A8AAA97003F9320 /* GeoItemsResponse.swift */; };
-		11BD2F922A8AB81A003F9320 /* geoItemResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 11BD2F912A8AB81A003F9320 /* geoItemResponse.json */; };
+		11BD2F922A8AB81A003F9320 /* geoItem.json in Resources */ = {isa = PBXBuildFile; fileRef = 11BD2F912A8AB81A003F9320 /* geoItem.json */; };
 		11BD2F952A8ABD25003F9320 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F942A8ABD25003F9320 /* LoadingView.swift */; };
+		11BD2F972A8BA9CC003F9320 /* SearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F962A8BA9CC003F9320 /* SearchViewModelTest.swift */; };
+		11BD2F992A8BB020003F9320 /* geoItemsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 11BD2F982A8BB020003F9320 /* geoItemsResponse.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +86,10 @@
 		11BD2F872A8AA759003F9320 /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
 		11BD2F8A2A8AA9F7003F9320 /* SearchItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItemView.swift; sourceTree = "<group>"; };
 		11BD2F8C2A8AAA97003F9320 /* GeoItemsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoItemsResponse.swift; sourceTree = "<group>"; };
-		11BD2F912A8AB81A003F9320 /* geoItemResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoItemResponse.json; sourceTree = "<group>"; };
+		11BD2F912A8AB81A003F9320 /* geoItem.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoItem.json; sourceTree = "<group>"; };
 		11BD2F942A8ABD25003F9320 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		11BD2F962A8BA9CC003F9320 /* SearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTest.swift; sourceTree = "<group>"; };
+		11BD2F982A8BB020003F9320 /* geoItemsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoItemsResponse.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +161,7 @@
 		114C63332A8A427300AAB829 /* OpenWeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				11BD2F962A8BA9CC003F9320 /* SearchViewModelTest.swift */,
 				114C63342A8A427300AAB829 /* OpenWeatherTests.swift */,
 			);
 			path = OpenWeatherTests;
@@ -313,7 +318,8 @@
 		11BD2F8E2A8AB7EF003F9320 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				11BD2F912A8AB81A003F9320 /* geoItemResponse.json */,
+				11BD2F912A8AB81A003F9320 /* geoItem.json */,
+				11BD2F982A8BB020003F9320 /* geoItemsResponse.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -430,8 +436,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BD2F992A8BB020003F9320 /* geoItemsResponse.json in Resources */,
 				114C632B2A8A427300AAB829 /* Preview Assets.xcassets in Resources */,
-				11BD2F922A8AB81A003F9320 /* geoItemResponse.json in Resources */,
+				11BD2F922A8AB81A003F9320 /* geoItem.json in Resources */,
 				114C63282A8A427300AAB829 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BD2F972A8BA9CC003F9320 /* SearchViewModelTest.swift in Sources */,
 				114C63352A8A427300AAB829 /* OpenWeatherTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

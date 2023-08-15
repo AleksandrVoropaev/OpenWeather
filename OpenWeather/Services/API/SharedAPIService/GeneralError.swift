@@ -25,3 +25,7 @@ enum GeneralError: Error {
         }
     }
 }
+
+extension GeneralError: LocalizedError {
+    var errorDescription: String? { "An error occurred" }
+}

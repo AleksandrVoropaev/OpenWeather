@@ -18,6 +18,7 @@ protocol LocationService {
     var locationPublisher: Published<Result<Location?, LocationError>>.Publisher { get }
 
     func start()
+    func updateLocation()
     func stop()
 }
 
@@ -40,24 +41,29 @@ final class LocationServiceImpl: NSObject, LocationService {
 
     // MARK: - INIT
 
-    init(desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyNearestTenMeters) {
+    init(desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyThreeKilometers) {
         super.init()
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = desiredAccuracy
+        locationManager.pausesLocationUpdatesAutomatically = true
     }
 
     // MARK: - PUBLIC FUNCTIONS
 
     func start() {
-        if locationManager.authorizationStatus == .authorizedAlways ||
-            locationManager.authorizationStatus == .authorizedWhenInUse {
-            locationManager.requestLocation()
-        } else {
+        switch locationManager.authorizationStatus {
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.startMonitoringSignificantLocationChanges()
+        default:
             DispatchQueue.main.async {
                 self.locationManager.requestWhenInUseAuthorization()
             }
         }
+    }
+
+    func updateLocation() {
+        locationManager.requestLocation()
     }
 
     func stop() {
@@ -69,7 +75,7 @@ final class LocationServiceImpl: NSObject, LocationService {
 
 extension LocationServiceImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        if let error = error as? CLError, error.code == .denied {
+        if case .denied = (error as? CLError)?.code {
             location = .failure(.permissionDenied)
         } else {
             location = .failure(.locationNotFound)
@@ -84,17 +90,13 @@ extension LocationServiceImpl: CLLocationManagerDelegate {
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .authorizedAlways,
-             .authorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             manager.requestLocation()
-        case .denied,
-             .notDetermined,
-             .restricted:
+        case .denied, .notDetermined, .restricted:
             location = .failure(.permissionDenied)
         @unknown default:
             location = .failure(.permissionDenied)
         }
     }
-
 }
 

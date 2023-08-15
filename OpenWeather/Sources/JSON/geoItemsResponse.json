@@ -1,0 +1,48 @@
+[
+  {
+    "name": "Altstadt",
+    "local_names": {
+      "de": "Altstadt"
+    },
+    "lat": 49.93756945,
+    "lon": 11.56115542727499,
+    "country": "DE",
+    "state": "Bavaria"
+  },
+  {
+    "name": "Å",
+    "local_names": {
+      "ru": "O"
+    },
+    "lat": 67.8796157,
+    "lon": 12.9840442,
+    "country": "NO"
+  },
+  {
+    "name": "Åfjord",
+    "lat": 63.9607726,
+    "lon": 10.2247137,
+    "country": "NO"
+  },
+  {
+    "name": "Ouled Achour",
+    "local_names": {
+      "ar": "ا",
+      "fr": "Ouled Achour"
+    },
+    "lat": 36.4265371,
+    "lon": 5.8893479,
+    "country": "DZ",
+    "state": "Mila"
+  },
+  {
+    "name": "Oe အိုး",
+    "local_names": {
+      "my": "အိုး"
+    },
+    "lat": 21.8106959,
+    "lon": 96.0868149,
+    "country": "MM",
+    "state": "Mandalay"
+  }
+]

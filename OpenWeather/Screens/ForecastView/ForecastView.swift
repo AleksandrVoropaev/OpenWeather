@@ -11,6 +11,7 @@ struct ForecastView: View {
     // MARK: - PROPERTIES
 
     @ObservedObject var viewModel: ViewModel = ViewModel()
+    @State private var isAlertPresented = false
 
     // MARK: - BODY
 
@@ -39,6 +40,12 @@ struct ForecastView: View {
             .refreshable {
                 viewModel.refreshForecast()
             }
+        }
+        .alert(isPresented: $isAlertPresented, error: viewModel.error) {}
+        .onReceive(viewModel.$error) {
+            guard $0 != nil else { return }
+
+            isAlertPresented = true
         }
     }
 }
