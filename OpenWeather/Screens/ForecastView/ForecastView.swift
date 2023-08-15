@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct ForecastView: View {
+    // MARK: - PROPERTIES
+
     @ObservedObject var viewModel: ViewModel = ViewModel()
+
+    // MARK: - BODY
 
     var body: some View {
         GeometryReader { reader in
@@ -38,6 +42,8 @@ struct ForecastView: View {
         }
     }
 }
+
+// MARK: - PREVIEW
 
 struct ForecastView_Previews: PreviewProvider {
     static var previews: some View {

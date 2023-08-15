@@ -72,6 +72,13 @@ struct SearchView: View {
                     SearchItemView(item: item)
                         .contentShape(Rectangle())
                         .onTapGesture {
+                            // Remove focus from search bar before switching the tab to prevent from AttributeGraph errors
+                            UIApplication.shared
+                                .sendAction(
+                                    #selector(UIResponder.resignFirstResponder),
+                                    to: nil, from:nil, for:nil
+                                )
+
                             viewModel.didSelect(item)
                         }
                 }
@@ -81,6 +88,7 @@ struct SearchView: View {
     }
 }
 
+// MARK: - PREVIEW
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

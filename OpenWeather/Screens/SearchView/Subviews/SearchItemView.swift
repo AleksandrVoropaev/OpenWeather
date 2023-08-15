@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SearchItemView: View {
+    // MARK: - PROPERTIES
+
     let item: GeoItem
+
+    // MARK: - BODY
 
     var body: some View {
         HStack {
@@ -20,6 +24,8 @@ struct SearchItemView: View {
         .padding()
     }
 }
+
+// MARK: - PREVIEW
 
 struct SearchItemView_Previews: PreviewProvider {
     static var previews: some View {

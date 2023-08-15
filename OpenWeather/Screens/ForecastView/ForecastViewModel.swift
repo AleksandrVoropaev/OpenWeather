@@ -15,6 +15,8 @@ extension ForecastView {
     }
 
     @MainActor final class ViewModel: ObservableObject {
+        // MARK: - PROPERTIES
+
         @Published var weather: WeatherResponse?
         @Published var error: PresentationError?
 
@@ -23,6 +25,8 @@ extension ForecastView {
         private let apiClient: WeatherAPIClient
         private let locationService: LocationService
         private var cancellables = Set<AnyCancellable>()
+
+        // MARK: - INIT
 
         init(apiClient: WeatherAPIClient = WeatherAPIClientImpl(),
              locationService: LocationService = LocationServiceImpl()
@@ -33,6 +37,8 @@ extension ForecastView {
             bindLocationService()
             bindUserLocation()
         }
+
+        // MARK: - PUBLIC FUNCTIONS
 
         func refreshForecast() {
             userLocation = nil
@@ -46,6 +52,8 @@ extension ForecastView {
                 }
             }
         }
+
+        // MARK: - PRIVATE FUNCTIONS
 
         private func fetchForecast(latitude: Double, longitude: Double) async {
             let weather = await apiClient.fetchCurrentWeather(latitude: latitude, longitude: longitude)

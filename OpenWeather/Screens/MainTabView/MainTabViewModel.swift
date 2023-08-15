@@ -10,12 +10,16 @@ import Combine
 
 extension MainTabView {
     @MainActor final class ViewModel: ObservableObject {
+        // MARK: - PROPERTIES
+
         let forecastViewModel: ForecastView.ViewModel
         let searchViewModel: SearchView.ViewModel
 
-        @Published var selectedTab = 1
+        private(set) var selectedTab = CurrentValueSubject<Tab, Never>(.forecast)
 
         private var cancellables = Set<AnyCancellable>()
+
+        // MARK: - INIT
 
         init(apiClient: WeatherAPIClient = WeatherAPIClientImpl()) {
             forecastViewModel = .init(apiClient: apiClient)
@@ -23,6 +27,8 @@ extension MainTabView {
 
             prepareBindings()
         }
+
+        // MARK: - PRIVATE FUNCTIONS
 
         private func prepareBindings() {
             searchViewModel.$selectedItem
@@ -32,7 +38,7 @@ extension MainTabView {
 
                     guard $0 != nil else { return }
 
-                    self?.selectedTab = 1
+                    self?.selectedTab.send(.forecast)
                 }
                 .store(in: &cancellables)
         }

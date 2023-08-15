@@ -10,6 +10,8 @@ import Combine
 
 extension SearchView {
     @MainActor final class ViewModel: ObservableObject {
+        // MARK: - PROPERTIES
+
         @Published var geoItems: [GeoItem] = []
         @Published var isLoading = false
         @Published var error: GeneralError?
@@ -19,16 +21,22 @@ extension SearchView {
 
         private let apiClient: WeatherAPIClient
         private var cancellables = Set<AnyCancellable>()
-        
+
+        // MARK: - INIT
+
         init(apiClient: WeatherAPIClient = WeatherAPIClientImpl()) {
             self.apiClient = apiClient
 
             bindSearchText()
         }
 
+        // MARK: - PUBLIC FUNCTIONS
+
         func didSelect(_ item: GeoItem) {
             selectedItem = item
         }
+
+        // MARK: - PRIVATE FUNCTIONS
 
         private func bindSearchText() {
             $searchText

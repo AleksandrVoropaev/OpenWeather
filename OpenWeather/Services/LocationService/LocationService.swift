@@ -9,6 +9,8 @@ import Foundation
 import CoreLocation
 import Combine
 
+// MARK: - PROTOCOL LocationService
+
 protocol LocationService {
     typealias Location = (latitude: Double, longitude: Double)
 
@@ -16,14 +18,19 @@ protocol LocationService {
     var locationPublisher: Published<Result<Location?, LocationError>>.Publisher { get }
 
     func start()
+    func stop()
 }
+
+// MARK: - ENUM LocationError
 
 enum LocationError: Error {
     case permissionDenied
     case locationNotFound
 }
 
-final class LocationServiceImpl: NSObject, CLLocationManagerDelegate, LocationService {
+final class LocationServiceImpl: NSObject, LocationService {
+    // MARK: - PROPERTIES
+
     @Published private(set) var location: Result<Location?, LocationError> = .success(nil)
     var locationPublisher: Published<Result<Location?, LocationError>>.Publisher {
         $location
@@ -31,12 +38,16 @@ final class LocationServiceImpl: NSObject, CLLocationManagerDelegate, LocationSe
 
     private let locationManager = CLLocationManager()
 
+    // MARK: - INIT
+
     init(desiredAccuracy: CLLocationAccuracy = kCLLocationAccuracyNearestTenMeters) {
         super.init()
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = desiredAccuracy
     }
+
+    // MARK: - PUBLIC FUNCTIONS
 
     func start() {
         if locationManager.authorizationStatus == .authorizedAlways ||
@@ -49,6 +60,14 @@ final class LocationServiceImpl: NSObject, CLLocationManagerDelegate, LocationSe
         }
     }
 
+    func stop() {
+        locationManager.stopUpdatingLocation()
+    }
+}
+
+// MARK: - DELEGATE
+
+extension LocationServiceImpl: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         if let error = error as? CLError, error.code == .denied {
             location = .failure(.permissionDenied)
