@@ -37,6 +37,7 @@
 		11BD2F952A8ABD25003F9320 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F942A8ABD25003F9320 /* LoadingView.swift */; };
 		11BD2F972A8BA9CC003F9320 /* SearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F962A8BA9CC003F9320 /* SearchViewModelTest.swift */; };
 		11BD2F992A8BB020003F9320 /* geoItemsResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 11BD2F982A8BB020003F9320 /* geoItemsResponse.json */; };
+		11BD2F9D2A8BD671003F9320 /* Text+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BD2F9C2A8BD671003F9320 /* Text+Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		11BD2F942A8ABD25003F9320 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		11BD2F962A8BA9CC003F9320 /* SearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelTest.swift; sourceTree = "<group>"; };
 		11BD2F982A8BB020003F9320 /* geoItemsResponse.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = geoItemsResponse.json; sourceTree = "<group>"; };
+		11BD2F9C2A8BD671003F9320 /* Text+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +190,7 @@
 		11BD2F512A8A42E1003F9320 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				11BD2F9B2A8BD658003F9320 /* Extensions */,
 				11BD2F8E2A8AB7EF003F9320 /* JSON */,
 				11BD2F742A8A47E0003F9320 /* Models */,
 			);
@@ -332,6 +335,14 @@
 			path = LoadingView;
 			sourceTree = "<group>";
 		};
+		11BD2F9B2A8BD658003F9320 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				11BD2F9C2A8BD671003F9320 /* Text+Style.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +479,7 @@
 				11BD2F732A8A4673003F9320 /* Secret.swift in Sources */,
 				114C63242A8A427100AAB829 /* OpenWeatherApp.swift in Sources */,
 				11BD2F952A8ABD25003F9320 /* LoadingView.swift in Sources */,
+				11BD2F9D2A8BD671003F9320 /* Text+Style.swift in Sources */,
 				11BD2F8B2A8AA9F7003F9320 /* SearchItemView.swift in Sources */,
 				11BD2F762A8A47F2003F9320 /* WeatherResponse.swift in Sources */,
 				11BD2F882A8AA759003F9320 /* MainTabViewModel.swift in Sources */,

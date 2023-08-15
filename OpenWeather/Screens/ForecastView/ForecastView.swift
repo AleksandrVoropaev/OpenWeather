@@ -21,20 +21,20 @@ struct ForecastView: View {
                 Group {
                     if let temperature = viewModel.weather?.main.temp {
                         VStack {
-                            Text(String(format: "%.0f℃", temperature))
-                            Text(viewModel.userLocation.map(\.name) ?? "Your location")
+                            Text(String(format: Constants.Strings.temperatureFormat, temperature))
+                            Text(viewModel.userLocation.map(\.name) ?? Constants.Strings.yourLocation)
                                 .font(.system(size: 18, weight: .light))
                         }
                     } else {
-                        Text("--")
+                        Text(Constants.Strings.emptyTemperature)
                     }
                 }
                 .foregroundColor(.accentColor)
                 .font(.system(size: 100, weight: .thin))
                 .frame(maxWidth: .infinity, minHeight: reader.size.height)
                 .overlay(alignment: .top) {
-                    Text("pull to refresh")
-                        .font(.system(size: 18, weight: .light))
+                    Text(Constants.Strings.pullToRefresh)
+                        .secondary()
                 }
             }
             .refreshable {
@@ -55,5 +55,17 @@ struct ForecastView: View {
 struct ForecastView_Previews: PreviewProvider {
     static var previews: some View {
         ForecastView()
+    }
+}
+
+// MARK: - CONSTANTS
+
+private enum Constants {
+    // Change with the localization framework of your choice
+    enum Strings {
+        static let pullToRefresh = "pull to refresh"
+        static let temperatureFormat = "%.0f℃"
+        static let emptyTemperature = "--"
+        static let yourLocation = "Your Location"
     }
 }

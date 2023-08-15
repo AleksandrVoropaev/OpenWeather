@@ -21,10 +21,10 @@ struct SearchView: View {
         VStack {
             searchBar
 
-            if viewModel.geoItems.count > 0 {
-                scrollView
-            } else {
+            if viewModel.geoItems.isEmpty {
                 placeholder
+            } else {
+                scrollView
             }
         }
         .padding(.horizontal)
@@ -39,13 +39,13 @@ struct SearchView: View {
     // MARK: - SEARCHBAR
 
     var searchBar: some View {
-        TextField("Search here", text: $viewModel.searchText)
+        TextField(Constants.Strings.placeholder, text: $viewModel.searchText)
             .padding([.vertical, .trailing], 10)
             .padding(.leading, 40)
             .background(Color.gray.opacity(0.1))
             .cornerRadius(8)
             .overlay(alignment: .leading) {
-                Image(systemName: "magnifyingglass")
+                Image(systemName: Constants.Images.search)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 20)
@@ -63,7 +63,8 @@ struct SearchView: View {
             } else {
                 VStack {
                     Spacer()
-                    Text("Please Search Your Location")
+                    Text(Constants.Strings.prompt)
+                        .secondary()
                     Spacer()
                 }
             }
@@ -100,5 +101,17 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView()
+    }
+}
+
+private enum Constants {
+    // Change with the localization framework of your choice
+    enum Strings {
+        static let placeholder = "Search here"
+        static let prompt = "Please Search Your Location"
+    }
+
+    enum Images {
+        static let search = "magnifyingglass"
     }
 }

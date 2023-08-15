@@ -14,7 +14,6 @@ extension ForecastView {
 
         @Published var weather: WeatherResponse?
         @Published var error: PresentationError?
-
         @Published var userLocation: GeoItem?
         
         private let apiClient: WeatherAPIClient
