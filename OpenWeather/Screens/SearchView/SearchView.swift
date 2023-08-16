@@ -92,7 +92,7 @@ struct SearchView: View {
                 }
             }
         }
-        .scrollDismissesKeyboard(.immediately)
+        .scrollDismissesKeyboard(.interactively)
     }
 }
 

@@ -58,7 +58,7 @@ extension MainTabView {
 private enum Constants {
     // Change with the localization framework of your choice
     enum Strings {
-        static let forecats = "Forecast"
+        static let forecats = "Weather"
         static let search = "Search"
     }
 

@@ -15,21 +15,29 @@ extension ForecastView {
         @Published var weather: WeatherResponse?
         @Published var error: PresentationError?
         @Published var userLocation: GeoItem?
-        
+
+        var formattedTemperature: String {
+            unitsManager.formattedString(fromTemperature: weather?.main.temp)
+        }
+
         private let apiClient: WeatherAPIClient
         private let locationService: LocationService
+        private let unitsManager: UnitsManager
         private var cancellables = Set<AnyCancellable>()
 
         // MARK: - INIT
 
         init(apiClient: WeatherAPIClient = WeatherAPIClientImpl(),
-             locationService: LocationService = LocationServiceImpl()
+             locationService: LocationService = LocationServiceImpl(),
+             unitsManager: UnitsManager = UnitsManagerImpl()
         ) {
             self.apiClient = apiClient
             self.locationService = locationService
+            self.unitsManager = unitsManager
 
             bindLocationService()
             bindUserLocation()
+            bindLocaleUpdate()
         }
 
         // MARK: - PUBLIC FUNCTIONS
@@ -41,7 +49,11 @@ extension ForecastView {
         // MARK: - PRIVATE FUNCTIONS
 
         private func fetchForecast(latitude: Double, longitude: Double) async {
-            let weather = await apiClient.fetchCurrentWeather(latitude: latitude, longitude: longitude)
+            let weather = await apiClient.fetchCurrentWeather(
+                latitude: latitude,
+                longitude: longitude,
+                system: unitsManager.currentMeasurementSystem
+            )
 
             switch weather {
             case .success(let weather):
@@ -87,6 +99,14 @@ extension ForecastView {
                     Task {
                         await self?.fetchForecast(latitude: location.0, longitude: location.1)
                     }
+                }
+                .store(in: &cancellables)
+        }
+
+        private func bindLocaleUpdate() {
+            unitsManager.didUpdateLocale
+                .sink { [weak self] _ in
+                    self?.refreshForecast()
                 }
                 .store(in: &cancellables)
         }

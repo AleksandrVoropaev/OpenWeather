@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherEndpoint {
-    case getCurrentWeather(latitude: Double, longitude: Double)
+    case getCurrentWeather(latitude: Double, longitude: Double, system: Locale.MeasurementSystem)
     case getGeoItems(query: String)
 }
 
@@ -42,11 +42,11 @@ extension WeatherEndpoint: Endpoint {
 
     var query: [String : String?]? {
         switch self {
-        case .getCurrentWeather(let latitude, let longitude):
+        case .getCurrentWeather(let latitude, let longitude, let system):
             return [
                 "lat": String(latitude),
                 "lon": String(longitude),
-                "units": "metric",
+                "units": units(for: system),
                 "lang": "en",
                 "appid": apiKey
             ]
@@ -62,4 +62,13 @@ extension WeatherEndpoint: Endpoint {
 
 private enum Constants {
     static let apiKey: String = apiKey // Insert your API key here
+}
+
+extension WeatherEndpoint {
+    func units(for system: Locale.MeasurementSystem) -> String {
+        switch system {
+        case .metric: return "metric"
+        default: return "imperial"
+        }
+    }
 }

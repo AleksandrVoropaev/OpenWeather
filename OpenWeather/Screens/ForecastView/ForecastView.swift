@@ -19,14 +19,11 @@ struct ForecastView: View {
         GeometryReader { reader in
             ScrollView {
                 Group {
-                    if let temperature = viewModel.weather?.main.temp {
-                        VStack {
-                            Text(String(format: Constants.Strings.temperatureFormat, temperature))
-                            Text(viewModel.userLocation.map(\.name) ?? Constants.Strings.yourLocation)
-                                .font(.system(size: 18, weight: .light))
-                        }
-                    } else {
-                        Text(Constants.Strings.emptyTemperature)
+                    VStack {
+                        Text(viewModel.formattedTemperature)
+
+                        Text(viewModel.userLocation.map(\.name) ?? Constants.Strings.yourLocation)
+                            .font(.system(size: 18, weight: .light))
                     }
                 }
                 .foregroundColor(.accentColor)
