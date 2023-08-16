@@ -87,11 +87,11 @@ The app's codebase is written with testing in mind. You can find an example test
 
 ## Screenshots
 
-![Current Location Weather](screenshots/weather_current_screen.png)![Current Location Weather](screenshots/weather_current_screen_dark.png)
+![Current Location Weather](/Screenshots/weather_current_screen.png)![Current Location Weather](/Screenshots/weather_current_screen_dark.png)
 
-![Location Search](screenshots/search_location_screen.png)![Location Search](screenshots/search_location_screen_dark.png)
+![Location Search](/Screenshots/search_location_screen.png)![Location Search](/Screenshots/search_location_screen_dark.png)
 
-![Selected Location Weather](screenshots/weather_selected_screen.png)![Selected Location Weather](screenshots/weather_selected_screen_dark.png)
+![Selected Location Weather](/Screenshots/weather_selected_screen.png)![Selected Location Weather](/Screenshots/weather_selected_screen_dark.png)
 
 ## Contributing
 
