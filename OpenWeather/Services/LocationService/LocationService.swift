@@ -52,22 +52,32 @@ final class LocationServiceImpl: NSObject, LocationService {
     // MARK: - PUBLIC FUNCTIONS
 
     func start() {
+        performIfAuthorised { [weak self] in
+            self?.locationManager.startMonitoringSignificantLocationChanges()
+        }
+    }
+
+    func updateLocation() {
+        performIfAuthorised { [weak self] in
+            self?.locationManager.requestLocation()
+        }
+    }
+
+    func stop() {
+        locationManager.stopUpdatingLocation()
+    }
+
+    // MARK: - PRIVATE FUNCTIONS
+
+    private func performIfAuthorised(_ block: @escaping ()->()) {
         switch locationManager.authorizationStatus {
         case .authorizedAlways, .authorizedWhenInUse:
-            locationManager.startMonitoringSignificantLocationChanges()
+            block()
         default:
             DispatchQueue.main.async {
                 self.locationManager.requestWhenInUseAuthorization()
             }
         }
-    }
-
-    func updateLocation() {
-        locationManager.requestLocation()
-    }
-
-    func stop() {
-        locationManager.stopUpdatingLocation()
     }
 }
 
